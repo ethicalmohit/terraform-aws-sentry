@@ -44,6 +44,7 @@ It will fulfill the requirements of the sentry self-hosted setup on AWS.
 - Creation of security group and attaching it with the instance.
 - Storing Terraform state backend in s3 with DynamoDB locking.
 - Getting the value of sentry initial username and password from the root module.
+- Static test analysis of the code through terratest or tftest.
 
 #### License
 
