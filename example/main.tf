@@ -8,7 +8,6 @@ provider "aws" {
   region  = "ap-south-1"
 }
 
-
 module "sentry_setup" {
   source              = "../modules"
   public_key_material = var.public_key_material

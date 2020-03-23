@@ -1,11 +1,11 @@
 output "sentry_instance_dns" {
-  value = aws_instance_public_dns
+  value = module.sentry_setup.aws_instance_public_dns
 }
 
 output "sentry_instance_ip" {
-  value = aws_instance_public_ip
+  value = module.sentry_setup.aws_instance_public_ip
 }
 
 output "sentry_instance_id" {
-  value = aws_instance_id
+  value = module.sentry_setup.aws_instance_id
 }

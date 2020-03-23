@@ -1,17 +1,17 @@
 variable "name" {
-  default = string
+  type = string
 }
 
 variable "environment_name" {
-  default = string
+  type = string
 }
 
 variable "project_name" {
-  default = string
+  type = string
 }
 
 variable "terraform" {
-  default = string
+  type = string
 }
 
 variable "public_key_material" {
