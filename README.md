@@ -1,6 +1,6 @@
 # Terraform Sentry Setup
 
-It will fullfill the requirements of the sentry self hosted setup on aws.
+It will fulfill the requirements of the sentry self-hosted setup on AWS.
 
 # Resources Supported
 
@@ -9,7 +9,7 @@ It will fullfill the requirements of the sentry self hosted setup on aws.
 
 # AMI ID
 
-- Using latest stable CoreOs Container linux AMI ID.
+- Using the latest stable CoreOs Container Linux AMI ID.
 
 # Requirements
 
@@ -38,12 +38,12 @@ It will fullfill the requirements of the sentry self hosted setup on aws.
 ## Future Scope
 
 - Automatic tls private key creation to use with key_pair argument of the resource or to pass on the key pair resource name which should exist before running terraform apply.
-- Spawn instance in a autoscaling group using launch template and launch config.
+- Spawn instance in an autoscaling group using launch template and launch config.
 - Generating sentry key from the bootstrap script. Right now, It is hardcoded.
-- Adding capability to pass subnet groups, It will give modularity to use custom VPC.
+- Adding the capability to pass subnet groups, It will give modularity to use custom VPC.
 - Creation of security group and attaching it with the instance.
 - Storing Terraform state backend in s3 with DynamoDB locking.
-- Getting value of sentry initial username and password from the root module.
+- Getting the value of sentry initial username and password from the root module.
 
 #### License
 
