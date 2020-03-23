@@ -2,11 +2,48 @@
 
 It will fullfill the requirements of the sentry self hosted setup on aws.
 
+# Resources Supported
+
+ - AWS EC2 Instance
+ - AWS Key Pair
+
+# AMI ID
+
+- Using latest stable CoreOs Container linux AMI ID.
+
 # Requirements
 
-- VPC 
-- A Subnet
-- A Security group allowing connections on 80/443.
+- Terraform version >= v0.12.23
+- AWS Provider >= v2.43.0
+- Default VPC 
+- Default Public Subnet
+- A Security group allowing connections on 80/443/22 attached to the instance.
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| instance_type | EC2 Instance Type | string | `t2.large` | yes |
+| public_key_material | A public key data. | string | `null` | yes |
+| tags | Region name | map | `null` | yes |
+
+## Outputs
+
+| Name | Description | 
+|------|-------------|
+| sentry_instance_dns | Public DNS of the instance. | 
+| sentry_instance_ip | Public IP of the instance. | 
+| sentry_instance_id | Instance ID. |
+
+## Future Scope
+
+- Automatic tls private key creation to use with key_pair argument of the resource or to pass on the key pair resource name which should exist before running terraform apply.
+- Spawn instance in a autoscaling group using launch template and launch config.
+- Generating sentry key from the bootstrap script. Right now, It is hardcoded.
+- Adding capability to pass subnet groups, It will give modularity to use custom VPC.
+- Creation of security group and attaching it with the instance.
+- Storing Terraform state backend in s3 with DynamoDB locking.
+- Getting value of sentry initial username and password from the root module.
 
 #### License
 
