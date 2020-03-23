@@ -1,0 +1,27 @@
+#cloud-config
+
+coreos:
+    units:
+    - name: sentry.service
+      command: start
+      runtime: true
+      content: |
+          [Unit]
+          Description=Sentry service
+          Requires=docker.socket
+          After=docker.socket
+
+          [Service]
+          Type=oneshot
+          TimeoutStartSec=0
+          TimeoutStopSec=infinity
+          ExecStartPre=-/usr/bin/docker kill sentry-user my-sentry sentry-redis sentry-postgres sentry-cron sentry-worker-1
+          ExecStartPre=-/usr/bin/docker rm sentry-user my-sentry sentry-redis sentry-postgres sentry-cron sentry-worker-1
+          ExecStart=/usr/bin/docker run -d --name sentry-redis redis
+          ExecStart=/usr/bin/docker run -d --name sentry-postgres -e POSTGRES_PASSWORD=secret -e POSTGRES_USER=sentry postgres
+          Environment=SECRET_KEY=d(%g+zbi(5002iaxt=ktoh_o_wv&4zpgc4_b@t@-7y6ar5=w6q
+          ExecStart=/usr/bin/docker run -d --rm -e SENTRY_SECRET_KEY='${SECRET_KEY}' --link sentry-postgres:postgres --link sentry-redis:redis sentry upgrade --noinput
+          ExecStart=/usr/bin/docker run -d --name sentry-user -e SENTRY_SECRET_KEY='${SECRET_KEY}' --link sentry-postgres:postgres --link sentry-redis:redis sentry createuser --email admin@admin.com --password admin --superuser --no-input
+          ExecStart=/usr/bin/docker run -p 80:9000 -d --name my-sentry -e SENTRY_SECRET_KEY='${SECRET_KEY}' --link sentry-redis:redis --link sentry-postgres:postgres sentry
+          ExecStart=/usr/bin/docker run -d --name sentry-cron -e SENTRY_SECRET_KEY='${SECRET_KEY}' --link sentry-postgres:postgres --link sentry-redis:redis sentry run cron
+          ExecStart=/usr/bin/docker run -d --name sentry-worker-1 -e SENTRY_SECRET_KEY='${SECRET_KEY}' --link sentry-postgres:postgres --link sentry-redis:redis sentry run worker
