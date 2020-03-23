@@ -26,7 +26,9 @@ data "aws_ami" "coreos_stable" {
 
 resource "aws_instance" "sentry" {
   ami           = data.aws_ami.coreos_stable.id
-  instance_type = "t2.micro"
+  instance_type = var.instance_type
+  key_name      = aws_key_pair.deployer.key_name
+  user_data     = base64encode(file("${path.module}/user-data.yml"))
 
   tags = {
     Name      = lookup(var.tags, "name", "")
@@ -36,3 +38,7 @@ resource "aws_instance" "sentry" {
   }
 }
 
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = var.public_key_material
+}
