@@ -2,16 +2,16 @@
 
 It will fulfill the requirements of the sentry self-hosted setup on AWS.
 
-# Resources Supported
+### Resources Supported
 
  - AWS EC2 Instance
  - AWS Key Pair
 
-# AMI ID
+### AMI ID
 
 - Using the latest stable CoreOs Container Linux AMI ID.
 
-# Requirements
+### Requirements
 
 - Terraform version >= v0.12.23
 - AWS Provider >= v2.43.0
@@ -19,7 +19,7 @@ It will fulfill the requirements of the sentry self-hosted setup on AWS.
 - Default Public Subnet
 - A Security group allowing connections on 80/443/22 attached to the instance.
 
-## Inputs
+### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
@@ -27,7 +27,7 @@ It will fulfill the requirements of the sentry self-hosted setup on AWS.
 | public_key_material | A public key data. | string | `null` | yes |
 | tags | Region name | map | `null` | yes |
 
-## Outputs
+### Outputs
 
 | Name | Description | 
 |------|-------------|
@@ -35,7 +35,7 @@ It will fulfill the requirements of the sentry self-hosted setup on AWS.
 | sentry_instance_ip | Public IP of the instance. | 
 | sentry_instance_id | Instance ID. |
 
-## Future Scope
+### Future Scope
 
 - Automatic tls private key creation to use with key_pair argument of the resource or to pass on the key pair resource name which should exist before running terraform apply.
 - Spawn instance in an autoscaling group using launch template and launch config.
