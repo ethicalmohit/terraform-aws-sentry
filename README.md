@@ -19,6 +19,23 @@ It will fulfill the requirements of the sentry self-hosted setup on AWS.
 - Default Public Subnet
 - A Security group allowing connections on 80/443/22 attached to the instance.
 
+### Example Usage:
+
+```
+module "sentry_setup" {
+  source              = "../modules"
+  public_key_material = var.public_key_material
+  instance_type       = "t2.large"
+
+  tags = {
+    name             = var.name
+    project_name     = var.project_name
+    environment_name = var.environment_name
+    terraform        = var.terraform
+  }
+}
+```
+
 ### Inputs
 
 | Name | Description | Type | Default | Required |
