@@ -9,7 +9,7 @@ provider "aws" {
 }
 
 module "sentry_setup" {
-  source              = "../modules"
+  source              = "../"
   public_key_material = var.public_key_material
   instance_type       = "t2.large"
 
