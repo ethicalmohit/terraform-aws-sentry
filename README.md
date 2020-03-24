@@ -63,6 +63,10 @@ module "sentry_setup" {
 - Getting the value of sentry initial username and password from the root module.
 - Static test analysis of the code through terratest or tftest.
 
+### Note:
+
+- Kindly change the secret key and the bootstrap username/password. Also, Current details including key mentioned is a "dummy text" and does not assosiate with any service. 
+
 #### License
 
 See the LICENSE file.
